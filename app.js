@@ -12,7 +12,7 @@ app.set('views','./views/pages');
 app.set('view engine','jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname,'bower_components')));
+app.use(express.static(path.join(__dirname,'public')));
 app.locals.moment = require('moment')
 app.listen(port);
 console.log('server started in port:'+port);
@@ -88,7 +88,19 @@ app.get('/list',function (req,res) {
 		})
 	})
 });
-
+app.delete('/admin/list',function (req,res) {
+	console.log(req)
+	var id = req.body.id
+	if (id) {
+		Movie.remove({_id:id},function  (err,movie) {
+			if (err) {
+				res.json({status: 500,error:err})
+			}else{
+				res.json({status: 200})
+			}
+		})
+	};
+})
 //detail
 app.get('/movie/:id',function (req,res) {
 
