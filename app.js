@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,'public')));
 app.locals.moment = require('moment')
 app.listen(port);
-console.log('server started in port:'+port);
 
 app.get('/',function (req,res) {
 	Movie.fetch(function (err,movie) {
@@ -89,7 +88,6 @@ app.get('/list',function (req,res) {
 	})
 });
 app.delete('/admin/list',function (req,res) {
-	console.log(req)
 	var id = req.body.id
 	if (id) {
 		Movie.remove({_id:id},function  (err,movie) {
