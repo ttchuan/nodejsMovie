@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,'public')));
 app.locals.moment = require('moment')
-app.listen(port);
+app.listen(port,function () {
+	console.log('server started at port:' + port)
+});
 
 app.get('/',function (req,res) {
 	Movie.fetch(function (err,movie) {
